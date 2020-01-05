@@ -1,3 +1,4 @@
+import Player from './Player.js'
 import Base from './Base.js'
 
 export default class Game extends Phaser.Scene {
@@ -11,6 +12,8 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.matter.world.setBounds();
+
     let platforms = [];
     platforms.push(this.matter.add.image(300,200,'platform').setStatic(true));
     platforms.push(this.matter.add.image(1100,200,'platform').setStatic(true));
@@ -25,6 +28,8 @@ export default class Game extends Phaser.Scene {
       this.bases.push(new Base(this,platforms[i].x,platforms[i].y-platforms[i].height*0.7));
     }
     this.activateStar();
+
+    this.player = new Player(this,300,300);
   }
 
   update(time, delta) {    
@@ -32,7 +37,6 @@ export default class Game extends Phaser.Scene {
 
   activateStar(){
     let chosen = this.bases[Math.floor(Math.random()*this.bases.length)];
-    console.log(chosen);
     chosen.activateStar();
   }
 }
