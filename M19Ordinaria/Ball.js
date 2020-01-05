@@ -7,7 +7,13 @@ export default class Ball extends Phaser.GameObjects.Ellipse{
 
         this.setFriction(0,0,0);
         this.setBounce(1);
-        this.setVelocity(maxSpeed,maxSpeed);
+        this.randomizeSpeed(maxSpeed);
+    }
 
+    randomizeSpeed(maxSpeed){
+        let velX = Math.floor(Math.random()*maxSpeed);
+        let velY = Math.floor(Math.random()*maxSpeed);
+
+        this.setVelocity(velX,velY);
     }
 }

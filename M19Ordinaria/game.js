@@ -13,6 +13,7 @@ export default class Game extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor('#FFFFFF');
+    this.matter.world.setBounds();
 
     let wallUp = new Wall(this,this.game.config.width/2,0,this.game.config.width,50);
     let wallDown = new Wall(this,this.game.config.width/2,this.game.config.height,this.game.config.width,50);
@@ -21,7 +22,7 @@ export default class Game extends Phaser.Scene {
 
     this.uiText = this.add.text(25,25,"Quedan x colisiones y Z segundos").setFontSize(40).setColor('#000000');
 
-    this.player = new Player(this,700,400);
+    this.player = new Player(this,700,400,10);
 
     let ball = new Ball(this,300,300,100,10);  
   }

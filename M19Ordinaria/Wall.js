@@ -6,5 +6,6 @@ export default class Wall extends Phaser.Physics.Matter.Image{
         this.displayHeight = h;
         this.setTintFill("0x0000FF");
         this.setStatic(true);
+        this.setBounce(1);
     }
 }
