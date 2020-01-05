@@ -24,9 +24,27 @@ export default class Game extends Phaser.Scene {
 
     this.player = new Player(this,700,400,10);
 
-    let ball = new Ball(this,300,300,100,10);  
+    let ball = new Ball(this,300,300,100,10,0);
+
+    this.matter.world.on('collisionstart', 
+      (evento, cuerpo1, cuerpo2) => {
+      if(cuerpo1 == this.player.body || cuerpo2 == this.player.body && (cuerpo1.type == "Ellipse" || cuerpo2.type == "Ellipse")){
+        let collidedBall = (cuerpo1 == this.player.body) ? cuerpo2 : cuerpo1;
+        this.ballCollided(collidedBall.gameObject);
+      }
+      },this);
   }
 
   update(time, delta) {    
+  }
+
+  ballCollided(collidedBall){
+    console.log(collidedBall);
+    if(collidedBall.divisions < 3){
+      new Ball(this,collidedBall.x,collidedBall.y,collidedBall.radius,10,collidedBall.divisions+1);
+      new Ball(this,collidedBall.x,collidedBall.y,collidedBall.radius,10,collidedBall.divisions+1);
+    }
+    collidedBall.body.destroy();
+    collidedBall.destroy();
   }
 }
