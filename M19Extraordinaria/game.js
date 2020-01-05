@@ -11,18 +11,28 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    this.platforms = [];
-    this.platforms.push(this.matter.add.image(300,200,'platform').setStatic(true));
-    this.platforms.push(this.matter.add.image(1100,200,'platform').setStatic(true));
-    this.platforms.push(this.matter.add.image(300,600,'platform').setStatic(true));
-    this.platforms.push(this.matter.add.image(1100,600,'platform').setStatic(true));
-    this.platforms.push(this.matter.add.image(700,400,'platform').setStatic(true));
+    let platforms = [];
+    platforms.push(this.matter.add.image(300,200,'platform').setStatic(true));
+    platforms.push(this.matter.add.image(1100,200,'platform').setStatic(true));
+    platforms.push(this.matter.add.image(300,600,'platform').setStatic(true));
+    platforms.push(this.matter.add.image(1100,600,'platform').setStatic(true));
+    platforms.push(this.matter.add.image(700,400,'platform').setStatic(true));
 
-    for(let i = 0; i < this.platforms.length; i++){
-      new Base(this,this.platforms[i].x,this.platforms[i].y-this.platforms[i].height);
+
+    const stars = this.matter.world.nextCategory();
+    this.bases = [];
+    for(let i = 0; i < platforms.length; i++){
+      this.bases.push(new Base(this,platforms[i].x,platforms[i].y-platforms[i].height*0.7));
     }
+    this.activateStar();
   }
 
   update(time, delta) {    
+  }
+
+  activateStar(){
+    let chosen = this.bases[Math.floor(Math.random()*this.bases.length)];
+    console.log(chosen);
+    chosen.activateStar();
   }
 }
