@@ -9,6 +9,7 @@ export default class Game extends Phaser.Scene {
   preload() {  
     this.load.image('player','Player.png');
     this.load.image('wall','Platform.png');
+    this.load.audio('laser','laser.mp3');
   }
 
   create() {
@@ -31,8 +32,10 @@ export default class Game extends Phaser.Scene {
         let collidedBall = (cuerpo1 == this.player.body) ? cuerpo2 : cuerpo1;
         this.ballCollided(collidedBall.gameObject);
       }
-      },this);
-
+      },this
+    );
+    this.laserShot = this.sound.add('laser');
+    
     //UI
     this.collisions = 15;
     this.timeToPlay = 30;//secs
@@ -79,6 +82,7 @@ export default class Game extends Phaser.Scene {
     if(collidedBall.divisions < 3){
       new Ball(this,collidedBall.x,collidedBall.y,collidedBall.radius,10,collidedBall.divisions+1);
       new Ball(this,collidedBall.x,collidedBall.y,collidedBall.radius,10,collidedBall.divisions+1);
+      this.laserShot.play();
     }
     collidedBall.body.destroy();
     collidedBall.destroy();
