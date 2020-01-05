@@ -29,7 +29,7 @@ export default class Game extends Phaser.Scene {
     }
     this.activateStar();
 
-    this.player = new Player(this,300,300);
+    this.player = new Player(this,300,300,10);
   }
 
   update(time, delta) {    
