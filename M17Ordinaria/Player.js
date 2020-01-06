@@ -4,8 +4,11 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
         scene.add.existing(this);
         this.setFixedRotation();
         this.setScale(3);
+        this.setBounce(0.8);
 
         this.speed = speed;
+        this.health = life;
+
         this.up = scene.input.keyboard.addKey(keys.up);
         this.left = scene.input.keyboard.addKey(keys.left);
         this.right = scene.input.keyboard.addKey(keys.right);
@@ -13,7 +16,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
 
     preUpdate(t, dt){
         this.setAngle(0);
-        
+
         if(this.left.isDown){
             this.setVelocityX(-this.speed);
         }else if(this.right.isDown){
