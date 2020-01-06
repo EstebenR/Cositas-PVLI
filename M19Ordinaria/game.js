@@ -82,8 +82,8 @@ export default class Game extends Phaser.Scene {
     if(collidedBall.divisions < 3){
       new Ball(this,collidedBall.x,collidedBall.y,collidedBall.radius,10,collidedBall.divisions+1);
       new Ball(this,collidedBall.x,collidedBall.y,collidedBall.radius,10,collidedBall.divisions+1);
-      this.laserShot.play();
     }
+    this.laserShot.play();
     collidedBall.body.destroy();
     collidedBall.destroy();
   }
