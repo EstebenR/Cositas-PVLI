@@ -8,6 +8,8 @@ Plataformer normal, incompleto xd
 Caja con bolas que rebotan y se dividen, sin animaciones ni sonido porque paque
 ##18 Extraordinaria
 Plataformer con monedas y puntos
+##18 Ordinaria
+Cajitas que rebotan y puedes borrar y mover
 
 
 #Helpful
