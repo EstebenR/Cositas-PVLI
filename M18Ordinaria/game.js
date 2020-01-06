@@ -15,9 +15,9 @@ export default class Game extends Phaser.Scene {
     this.boxSize = {min:50,max:100};
     this.boxSpeed = {min:0.05,max:0.15};
     this.boxes = [];
+    this.selectedBox = {object:undefined,position:undefined};
 
-    this.spacebar = this.input.keyboard.addKey("SPACE");
-    this.spacebar.on('down',this.createRandomBox,this);
+    this.setUpInput()
   }
 
   createRandomBox(){
@@ -25,8 +25,40 @@ export default class Game extends Phaser.Scene {
     let y = Math.floor(Math.random()*this.game.config.height);
     let size = Math.floor(Math.random()*(this.boxSize.max-this.boxSize.min)+this.boxSize.min);
     this.boxes.push(new Box(this,x,y,size,this.boxSpeed));
+    this.selectBox(this.boxes.length-1);
   }
 
-  update(time, delta) {    
+  selectBox(position){
+    if(this.selectedBox.object != undefined) this.selectedBox.object.fillColor = '0x0000FF';
+    this.selectedBox.object = this.boxes[position];
+    this.selectedBox.position = position;
+    this.selectedBox.object.fillColor = '0x00FF00';
+  }
+
+  deleteBox(){
+    if(this.selectedBox.object != undefined){
+      this.selectedBox.object.body.destroy();
+      this.selectedBox.object.destroy();
+      this.selectedBox.object = undefined;
+      this.boxes.splice(this.selectedBox.position,1);
+      if(this.boxes.length > 0){
+      this.selectBox(Math.floor(Math.random()*this.boxes.length));
+      }
+    }
+  }
+
+  setUpInput(){
+    this.dKey = this.input.keyboard.addKey("D");
+    this.dKey.on('down',this.deleteBox,this);
+    this.sKey = this.input.keyboard.addKey("S");
+    this.spacebar = this.input.keyboard.addKey("SPACE");
+    this.spacebar.on('down',this.createRandomBox,this);
+  }
+
+  update(time, delta) {
+    if(this.sKey.isDown){
+      let angle = (this.selectedBox.object.angle >= 180) ? -180 : this.selectedBox.object.angle+10;
+      this.selectedBox.object.setAngle(angle);
+    }
   }
 }
