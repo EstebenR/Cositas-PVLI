@@ -13,6 +13,7 @@ export default class Game extends Phaser.Scene {
     this.matter.world.setBounds();
 
     this.boxSize = {min:50,max:100};
+    this.boxSpeed = {min:0.05,max:0.15};
     this.boxes = [];
 
     this.spacebar = this.input.keyboard.addKey("SPACE");
@@ -23,7 +24,7 @@ export default class Game extends Phaser.Scene {
     let x = Math.floor(Math.random()*this.game.config.width);
     let y = Math.floor(Math.random()*this.game.config.height);
     let size = Math.floor(Math.random()*(this.boxSize.max-this.boxSize.min)+this.boxSize.min);
-    this.boxes.push(new Box(this,x,y,size));
+    this.boxes.push(new Box(this,x,y,size,this.boxSpeed));
   }
 
   update(time, delta) {    
