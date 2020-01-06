@@ -5,6 +5,8 @@ export default class Game extends Phaser.Scene {
     super({ key: 'main' });
   }
   preload() {  
+    this.load.audio('laser','laser.mp3');
+    this.load.audio('noise','powerUpSound.ogg');
   }
 
   create() {
@@ -17,6 +19,8 @@ export default class Game extends Phaser.Scene {
     this.boxes = [];
     this.selectedBox = {object:undefined,position:undefined};
 
+    this.laserSound = this.sound.add('laser');
+    this.noise = this.sound.add('noise');
 
     this.pushForce = 0.1;
     this.setUpInput()
@@ -28,6 +32,7 @@ export default class Game extends Phaser.Scene {
     let size = Math.floor(Math.random()*(this.boxSize.max-this.boxSize.min)+this.boxSize.min);
     this.boxes.push(new Box(this,x,y,size,this.boxSpeed));
     this.selectBox(this.boxes.length-1);
+    this.laserSound.play();
   }
 
   selectBox(position){
@@ -35,10 +40,12 @@ export default class Game extends Phaser.Scene {
     this.selectedBox.object = this.boxes[position];
     this.selectedBox.position = position;
     this.selectedBox.object.fillColor = '0x00FF00';
+    this.noise.play();
   }
 
   deleteBox(){
     if(this.selectedBox.object != undefined){
+      this.laserSound.play();
       this.selectedBox.object.body.destroy();
       this.selectedBox.object.destroy();
       this.selectedBox.object = undefined;
@@ -56,13 +63,13 @@ export default class Game extends Phaser.Scene {
     this.spacebar = this.input.keyboard.addKey("SPACE");
     this.spacebar.on('down',this.createRandomBox,this);
     this.up = this.input.keyboard.addKey("I");
-    this.up.on('down',f=>{this.selectedBox.object.applyForce({x:0,y:-this.pushForce});},this);
+    this.up.on('down',f=>{this.selectedBox.object.applyForce({x:0,y:-this.pushForce});this.laserSound.play();},this);
     this.left = this.input.keyboard.addKey("J");
-    this.left.on('down',f=>{this.selectedBox.object.applyForce({x:-this.pushForce,y:0});},this);
+    this.left.on('down',f=>{this.selectedBox.object.applyForce({x:-this.pushForce,y:0});this.laserSound.play();},this);
     this.down = this.input.keyboard.addKey("K");
-    this.down.on('down',f=>{this.selectedBox.object.applyForce({x:0,y:this.pushForce});},this);
+    this.down.on('down',f=>{this.selectedBox.object.applyForce({x:0,y:this.pushForce});this.laserSound.play();},this);
     this.right = this.input.keyboard.addKey("L");
-    this.right.on('down',f=>{this.selectedBox.object.applyForce({x:this.pushForce,y:0});},this);
+    this.right.on('down',f=>{this.selectedBox.object.applyForce({x:this.pushForce,y:0});this.laserSound.play();},this);
   }
 
   update(time, delta) {
