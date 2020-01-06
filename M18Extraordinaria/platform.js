@@ -4,5 +4,6 @@ export default class Platform extends Phaser.GameObjects.Rectangle{
         scene.add.existing(this);
         let collider = scene.matter.add.rectangle(x,y,w,h);
         scene.matter.add.gameObject(this,collider);
+        this.setStatic(true);
     }
 }
