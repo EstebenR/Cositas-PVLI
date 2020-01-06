@@ -17,6 +17,8 @@ export default class Game extends Phaser.Scene {
     this.boxes = [];
     this.selectedBox = {object:undefined,position:undefined};
 
+
+    this.pushForce = 0.1;
     this.setUpInput()
   }
 
@@ -53,6 +55,14 @@ export default class Game extends Phaser.Scene {
     this.sKey = this.input.keyboard.addKey("S");
     this.spacebar = this.input.keyboard.addKey("SPACE");
     this.spacebar.on('down',this.createRandomBox,this);
+    this.up = this.input.keyboard.addKey("I");
+    this.up.on('down',f=>{this.selectedBox.object.applyForce({x:0,y:-this.pushForce});},this);
+    this.left = this.input.keyboard.addKey("J");
+    this.left.on('down',f=>{this.selectedBox.object.applyForce({x:-this.pushForce,y:0});},this);
+    this.down = this.input.keyboard.addKey("K");
+    this.down.on('down',f=>{this.selectedBox.object.applyForce({x:0,y:this.pushForce});},this);
+    this.right = this.input.keyboard.addKey("L");
+    this.right.on('down',f=>{this.selectedBox.object.applyForce({x:this.pushForce,y:0});},this);
   }
 
   update(time, delta) {
