@@ -16,7 +16,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
         this.setExistingBody(compoundBody);
         //scene.matter.add.constraint(this.body,this.floorSensor);
 
-        this.scene.matter.world.on('collisionactive', 
+        this.scene.matter.world.on('collisionstart', 
         (evento, cuerpo1, cuerpo2) => {;if(cuerpo1 === this.floorSensor || cuerpo2 === this.floorSensor){
             this.isJumping = false;
         }},this);

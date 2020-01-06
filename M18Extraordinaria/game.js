@@ -25,9 +25,10 @@ export default class Game extends Phaser.Scene {
       let coin = new Coin(this,plats[i].x,plats[i].y-55);
     }
 
-    this.scene.matter.world.on('collisionactive', 
-        (evento, cuerpo1, cuerpo2) => {if(cuerpo1.isCoin || cuerpo2..isCoin){
-            console.log("bling");
+    this.matter.world.on('collisionstart', 
+        (evento, cuerpo1, cuerpo2) => {if(cuerpo1.gameObject != null && cuerpo2.gameObject != null && cuerpo1.gameObject.isCoin || cuerpo2.gameObject.isCoin){
+            let coin = (cuerpo1.gameObject.isCoin) ? cuerpo1.gameObject : cuerpo2.gameObject;
+            coin.destroy();
         }},this);
 
     this.player = new Player(this,700,300,10);
