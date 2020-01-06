@@ -22,6 +22,32 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
         }},this);
 
         this.cursors = scene.input.keyboard.createCursorKeys();
+        this.setUpAnimations.apply(this);
+    }
+
+    setUpAnimations(){
+        this.scene.anims.create({
+            key: 'PlayerRight',
+            frames: this.scene.anims.generateFrameNumbers('player', { start: 5, end: 6 }),
+            defaultTextureKey: null,
+            frameRate: 10,
+            delay: 0,
+            repeat: -1,
+            repeatDelay: 0
+        });
+    
+        this.scene.anims.create({
+            key: 'PlayerLeft',
+            //frames: this.scene.anims.generateFrameNumbers('player', { start: 7, end: 8 }),
+            frames: [{key:'player',frame:7},{key:'player',frame:7}],
+            defaultTextureKey: null,
+            frameRate: 10,
+             delay: 0,
+            repeat: -1,
+            repeatDelay: 0
+        });
+        this.cursors.left.on('down', event => {this.scene.player.anims.play('PlayerLeft',true)});
+        this.cursors.right.on('down', event => {this.scene.player.anims.play('PlayerRight',true)});
     }
 
     preUpdate(t,dt){
@@ -32,6 +58,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite{
             this.setVelocityX(this.speed);
         }else{
             this.setVelocityX(0);
+            this.setFrame(0);
         }
 
         if(this.cursors.up.isDown && !this.isJumping){
