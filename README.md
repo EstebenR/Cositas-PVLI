@@ -15,6 +15,9 @@ Plataformer con monedas y puntos
 **18 Ordinaria**
 Cajitas que rebotan y puedes borrar y mover
 
+**17 Ordinaria**
+Dos personajes que se chocan y van perdiendo vida
+
 ## Helpful
 Animations: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/animation/#play-animation
 Matter collisions: https://itnext.io/modular-game-worlds-in-phaser-3-tilemaps-5-matter-physics-platformer-d14d1f614557
