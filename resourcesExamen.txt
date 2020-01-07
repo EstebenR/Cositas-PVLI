@@ -1,0 +1,51 @@
+REPOS:
+
+Repaso:
+    Esteban: https://github.com/EstebenR/Cositas-PVLI
+    Adrián: https://github.com/AdriAlvarez00/ModelosPVLI
+    Pj: https://github.com/Pj6595/PVLITest
+    Juanma: https://github.com/JuanmaSalva/ExamenesPVLI
+
+Juegos:
+    https://github.com/Pj6595/TinkyTycoon
+    https://github.com/auraum/
+    https://github.com/mmur07/Tri-Towers
+    https://github.com/JuanmaSalva/PVLI
+
+RESOURCES:
+
+Colisiones Matter más faciles: https://github.com/mikewesthad/phaser-matter-collision-plugin
+
+    hay como dos formas. Yo pongo esto en el index después de cargar phaser.min.js
+    {
+    <script src="//cdn.jsdelivr.net/npm/phaser-matter-collision-plugin"></script>
+    y luego en el config del juego 
+    input: {
+                gamepad: true
+            },
+            plugins: {
+                scene: [
+                    {
+                        plugin: PhaserMatterCollisionPlugin, // The plugin class
+                        key: "matterCollision", // Where to store in Scene.Systems, e.g. scene.sys.matterCollision
+                        mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
+                    }
+                ]
+            },
+            scale: {
+                mode: Phaser.Scale.FIT,
+                autoCenter: Phaser.Scale.CENTER_BOTH
+            },
+    }
+
+    Y luego para la colisión:
+
+    this.matterCollision.addOnCollideStart({
+    objectA: player,
+    objectB: trapDoor,
+    callback: () => console.log("Player touched door!")
+    });
+
+Animations: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/animation/#play-animation 
+Matter collisions plataformer: https://itnext.io/modular-game-worlds-in-phaser-3-tilemaps-5-matter-physics-platformer-d14d1f614557 
+Matter collisions plataformer: http://labs.phaser.io/edit.html?src=src%5Cgame%20objects%5Ctilemap%5Ccollision%5Cmatter%20platformer%20with%20wall%20jumping.js
