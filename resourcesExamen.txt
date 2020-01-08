@@ -47,5 +47,6 @@ Colisiones Matter más faciles: https://github.com/mikewesthad/phaser-matter-col
     });
 
 Animations: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/animation/#play-animation 
+Creador de colliders para sprites complejos: https://www.codeandweb.com/physicseditor/tutorials/how-to-create-physics-shapes-for-phaser-3-and-matterjs
 Matter collisions plataformer: https://itnext.io/modular-game-worlds-in-phaser-3-tilemaps-5-matter-physics-platformer-d14d1f614557 
 Matter collisions plataformer: http://labs.phaser.io/edit.html?src=src%5Cgame%20objects%5Ctilemap%5Ccollision%5Cmatter%20platformer%20with%20wall%20jumping.js
